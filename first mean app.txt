@@ -1,0 +1,98 @@
+download node.js 
+and install it
+
+once installed open node js command prompt from start menu - this command prompt will b used for entire project
+node -v === node version
+npm -v == npm version
+
+then install mongodb into system
+
+data will b epresent in C:\Program Files\MongoDB\Server\4.0\data\
+C:\Program Files\MongoDB\Server\4.0\data\
+
+u need to run the db before u can do any operations on the database
+You can run MongoDB Community Edition from the Windows command prompt/interpreter (cmd.exe) instead of as a service.
+either from command prompt or as service
+
+steps to run mongodb 
+
+- Create the data directory where MongoDB stores data. MongoDB’s default data directory path is the absolute path \data\db on the drive from which you start MongoDB.
+
+From the Command Interpreter, create the data directories:
+
+cd C:\
+md "\data\db"
+
+- To start MongoDB, run mongod.exe.
+"C:\Program Files\MongoDB\Server\4.0\bin\mongod.exe" --dbpath="c:\data\db"
+
+If the MongoDB database server is running correctly, the Command Interpreter displays:
+
+[initandlisten] waiting for connections
+
+
+now create a project :
+
+npm init command to build project & create package.json file which contains all the dependencies
+
+npm init
+
+it will ask for project name, version, description, entry point -- file from where server side execution starts
+name it as index.js or app.js
+
+then open the vs code n open project
+package.json provide info of what u have added during init stage
+
+to install dependencies :
+
+npm install express --save (save will make sure it gets added to ur package.json file
+while sending file, just send source code n package.json file n they can install the dependencies
+
+multiple dependencies can be installed :
+
+npm install mongoose cors body-parser --save
+mongooose -- object document parser for using mongo db
+body-parser -- for parsing the incoming data
+cors -- avoid conflict with client side and server side servers
+
+next ,, app.js is the main file from where server side code starts
+we will create that file first
+
+- here first import the modules
+ var express = require('express'); etc which are all the dependencies defined in package.json
+- express method is assigned to a variable
+ var app = express();
+- define a port number
+ const port = 3000;
+- bind the server with the port number
+ app.listen(port,()=>{
+	 console.log('Server started at port:'+port);
+ });
+- add a route , so that if we go to localhost 3000, we need the specify the server what it needs to render for that home page route
+all the routes will b created in a seaparte file called route.js
+ app.get('/',(req, res)=>{
+	 res.send('foobar');
+ });
+
+- then run the server
+contactlist>node app.js
+
+
+*** creating route in 2.x and higher in diff format :
+
+- now add route folder inside the project contact list to create a separate folder for all routes
+const route = require('./routes/route')
+
+to use it :
+app.use('/api', route);
+
+- add middleware - cors and body-parser
+app.use(cors());
+app.use(bodyparser.json());
+
+- keep all static file in one folder 
+folder public and inside that index.html which will be rendered by front end application
+ app.use(express.static(path.join(__dirname,'public')));
+ 
+- lets create some routes
+route.js
