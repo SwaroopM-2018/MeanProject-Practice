@@ -1,1 +1,2 @@
 This folder contains sample applications created for practice purpose
+npm install express moment socket.io 
